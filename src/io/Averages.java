@@ -1,6 +1,12 @@
 package io;
 import java.util.*;
-
+/*
+ * Takes n numbers as input and returns 
+ * Sum, Min, Max, Mean, Median and Mode
+ * (if no mode, prints out "none")
+ * 
+ * n = number of integers as input
+ */
 public class Averages {
 
 	public static int mostFrequentCount = 0;
