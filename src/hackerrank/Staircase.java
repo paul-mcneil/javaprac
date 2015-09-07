@@ -68,25 +68,5 @@ public class Staircase {
 		
 		
 	}
-	
-	static String[] generateStairs(String[] s, int N){
-		
-		
-		for(int i = 0; i < N; i++){
-			s[i] = generateStep(i+1);
-		}
-		return s;	
-	}
-	
-	static String generateStep(int n){
-		
-		String temp = "#";
-		
-		for(int i = 1; i < n; i++){
-			temp = temp.concat("#");
-		}
-		//System.out.println(n + " " + temp);
-		return temp;
-	}
 
 }
