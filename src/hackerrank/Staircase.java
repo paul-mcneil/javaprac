@@ -14,7 +14,7 @@
  * 		#
  * 	   ##	
  * 	  ###
- *   ####
+ *   ####	
  *   
  */
 
@@ -27,7 +27,7 @@ import java.io.InputStreamReader;
 public class Staircase {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+
 		String N = null;
 		BufferedReader kb = new BufferedReader(new InputStreamReader(System.in));
 		
@@ -36,13 +36,14 @@ public class Staircase {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		// height of staircase
 		int n = Integer.parseInt(N);
 		
-		// m is number of rows
-		// n is number of columns
-		char[][] A = new char[n][n];
+		char[][] A = new char[n][n];	// n by n matrix
 		int offset = n-1;
 		
+		// set all A[i][j] values to spaces
 		for(int i = 0; i < n; i++){
 			for(int j = 0; j < n; j++){
 				A[i][j] = ' ';
@@ -64,9 +65,6 @@ public class Staircase {
 				System.out.print(" ");
 			}
 			System.out.println("");
-		}
-		
-		
+		}	
 	}
-
 }
