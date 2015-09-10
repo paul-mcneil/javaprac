@@ -42,11 +42,13 @@ public class ICPC_Team {
 		int count = 0;
 		for(int i = 0; i < numPeople; i++){
 			for(int j = 0; j < numTopics; j++){
-				if(A[i][j] == A[i+1][j])
+				int k = j+1;
+				if(A[i][j] == A[k][j])
 					count++;
 			}
 			System.out.println("");
-		}		
+		}
+		System.out.print(count);
 	
 		
 	}
