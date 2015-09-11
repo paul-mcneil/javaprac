@@ -32,81 +32,58 @@ public class ICPC_Team {
 				A[i][j] = temp[j];
 			}
 		}
-		// numPeople = 4
-		// numTopics = 5
+	/*	
 		for(int i = 0; i < numPeople; i++){
 			for(int j = 0; j < numTopics; j++){
 				System.out.print(A[i][j]);
 			}
 			System.out.println("");
 		}
+	*/
 		int count = 0;
-		int indexTracker = 0;
-
+		int temp = 0;
+		int max = 0;
+		int totalMaxCount = 0;
 		for(int i = 0; i < numPeople-1; i++){
-			for(int j = 0; j < numTopics; j++){
-				
-				for(int k = indexTracker; k < numPeople;k++){
-					
-					count++;
-					System.out.print("*Comparing ");
-					System.out.print("[" + i + "][" + j + "]");
-					System.out.print(" and " );
-					System.out.print("[" + (i+1) + "][" + j + "]");
-					System.out.println("");
-					
-					if(A[i][j] == A[i+1][j]){
-						
-					}
-					
-					if(A[i][j] == A[i][k]){
-						
-					}
-						
-				}
-				indexTracker++;
-				
 			
-				
-			/*	
+			temp = i;
+			count = 0;
+			for(int j = 0; j < numTopics; j++){
+			/*
 				System.out.print("Comparing ");
 				System.out.print("[" + i + "][" + j + "] = ");
 				System.out.print(A[i][j] + " and " );
-				System.out.print("[" + (i+1) + "][" + j + "] = " + A[i+1][j]);
+				System.out.print("[" + (temp+1) + "][" + j + "] = " + A[temp+1][j]);
 				System.out.println("");
-				
-				if(A[i][j] == A[i+1][j]){
-					//something
-				}
-							
-				for(int k = i+1; k < numPeople;k++){
-					count++;
-					System.out.print("*Comparing ");
-					System.out.print("[" + i + "][" + j + "]");
-					System.out.print(" and " );
-					System.out.print("[" + (k) + "][" + j + "]");
-					System.out.println("");
-					
-					if(A[i][j] == A[k][j]){
-						
-					}
-					
-					if(A[i][j] == A[i][k]){
-						
-					}
-						
-				}
 			*/	
+				if(A[i][j] == '1' || A[temp+1][j] == '1'){
+					count++;
+					if(count >= max){
+						
+						if(count > max){
+							max = count;
+							totalMaxCount = 1;
+						}else{
+							totalMaxCount++;
+						}
+					}
+				}
+					
 				
+				if( j != 0 && j % numPeople == 0 && temp < numPeople-2){
+					
+					System.out.println("");
+					count = 0;
+					j = -1;
+					temp++;
+				}
 				
-				
-				//count++;
 			}
 			System.out.println("");
 		}
-		System.out.print(count);
+		System.out.println(max);
+		System.out.println(totalMaxCount);
 	
 		
 	}
-
 }
