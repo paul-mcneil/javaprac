@@ -72,14 +72,14 @@ public class ICPC_Team {
 				
 				if( j != 0 && j % numPeople == 0 && temp < numPeople-2){
 					
-					System.out.println("");
+				//	System.out.println("");
 					count = 0;
 					j = -1;
 					temp++;
 				}
 				
 			}
-			System.out.println("");
+			//System.out.println("");
 		}
 		System.out.println(max);
 		System.out.println(totalMaxCount);
