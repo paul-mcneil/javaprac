@@ -1,55 +1,78 @@
 package hackerrank;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class ArrayGame2{
 
 	public static void main(String[] args){
 		
-		// m = 3
-		int[] list = { 0, 1, 0, 0, 0, 1, 1};
+		int m = 5;
+		Vertex frontVertex;
+		int[] numArr = { 0, 1, 0, 0, 0, 1, 1};
+		//int[] numArr = { 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1};
 		
+		int[] list = Arrays.copyOf(numArr, numArr.length+m);
 		
+		for(int i = 0; i < list.length; i++){
+			System.out.print(i + " ");
+		}
+		System.out.println("");
+		
+		for(int i = 0; i < list.length; i++){
+			System.out.print(list[i] + " ");
+		}
+		System.out.println("");
+		
+		ArrayList<Vertex> adjLists = createAdjList(list);
+		
+		frontVertex = adjLists.get(0);
+		findNeighbors(adjLists,m);
+	
+		explore(adjLists, frontVertex);
+		
+		if(isPossibleToWin(adjLists, m))
+			System.out.println("YES");
+		else
+			System.out.println("NO");
+		
+	}
+	
+	private static void findNeighbors(ArrayList<Vertex> adjLists, int m) {
+		// TODO Auto-generated method stub
+		for(int i = 0; i < adjLists.size()-m; i++){
+			Vertex V = adjLists.get(i);
+			while(addNextValidNeighbor(adjLists,V,m)){
+				
+				continue;
+			}
+			resetVisited(adjLists);		
+		}
+		
+	}
+
+	private static ArrayList<Vertex> createAdjList(int[] list) {
+		// TODO Auto-generated method stub
 		ArrayList<Vertex> adjLists = new ArrayList<Vertex>();
-		System.out.println("List length:" + list.length);
 		for(int i = 0; i < list.length; i++){
 			Vertex V = new Vertex();
 			V.setID(i);
 			V.setValue(list[i]);
 			adjLists.add(V);
 		}
-		
-		
-		explore(adjLists, adjLists.get(2));
-		System.out.println("adjList length:" + adjLists.size());
-		
-		addNeighbor(adjLists.get(1), adjLists.get(2));
-		addNeighbor(adjLists.get(1), adjLists.get(3));
-		
-		addNeighbor(adjLists.get(2), adjLists.get(3));
-		addNeighbor(adjLists.get(2), adjLists.get(4));
-		
-		addNeighbor(adjLists.get(4), adjLists.get(5));
-		addNeighbor(adjLists.get(5), adjLists.get(6));
-	
-		System.out.println("Adjacency List:");
-		
-		for(int i = 0; i < adjLists.size(); i++){
-			
-			
-			System.out.print(i + " visited (");
-			System.out.print(adjLists.get(i).visited + "): ");
-			
-			for(Vertex V : adjLists.get(i).neighbors){
-				System.out.print(V.getID() + " ");
-			}
-			System.out.println("");
-			//System.out.println(i + ": " + adjLists.get(i).neighbors);
-			
-		}
+		return adjLists;
 		
 	}
-	
+
+	public static boolean isPossibleToWin(ArrayList<Vertex> AdjList, int m){
+		int index = AdjList.size()-m;
+		
+		for(int i = index; i < index+m;i++){
+			if(AdjList.get(i).visited)
+				return true;
+		}
+		return false;
+	}
 	public static void explore(ArrayList<Vertex> G, Vertex V){
 		
 		V.visited = true;
@@ -57,10 +80,10 @@ public class ArrayGame2{
 		//System.out.println(getNextNeighbor(G,V));
 		Vertex W = new Vertex();
 		W = getNextNeighbor(G,V);
-		System.out.println(W.getID());
+		//System.out.println(W.getID());
 		while(getNextNeighbor(G,V) != null){
 			Vertex U = getNextNeighbor(G,V);
-			System.out.println("Inside explore");
+			//System.out.println("Inside explore");
 			if(!U.visited){
 				explore(G,U);
 			}
@@ -81,7 +104,7 @@ public class ArrayGame2{
 		for(int i = 0; i < V.neighbors.size(); i++){
 			//System.out.println(V.neighbors.get(i).visited);
 			if(!V.neighbors.get(i).visited){
-				System.out.println("*** " + V.neighbors.get(i));
+				//System.out.println("*** " + V.neighbors.get(i));
 				return V.neighbors.get(i);
 			}
 			
@@ -91,39 +114,69 @@ public class ArrayGame2{
 	public static void addNeighbor(Vertex V, Vertex U){
 		
 		V.neighbors.add(U);
+		U.visited = true;
 	}
 	
 	public static ArrayList<Vertex> getNeighbors(Vertex V){
 		
 		return V.neighbors;
 	}
-	public static int validMove(int index, int[] list, int m){
+	public static boolean addNextValidNeighbor(ArrayList<Vertex>list, Vertex V, int m){
+		Vertex nextVertex;
 		
-		if(index > 0){
-			
-			if(list[index+1] == 0){
-				return index+1;
+		if(V.getID() > 0 && V.getID() < list.size() - m){
+			nextVertex = list.get(V.getID()+1);
+			if(!nextVertex.visited){
+				if(nextVertex.getValue() == 0){
+					addNeighbor(V,nextVertex);
+					return true;
+				}
+				
 			}
-			else if(list[index+m] == 0){
-				return index+m;
+			nextVertex = list.get(V.getID()-1);
+			if(!nextVertex.visited){
+				if(nextVertex.getValue() == 0){
+					addNeighbor(V,nextVertex);
+					return true;
+				}
 			}
-			else if(list[index-1] == 0){
-				return validMove(index-1, list, m);
+			nextVertex = list.get(V.getID()+m);
+			if(!nextVertex.visited){
+				if(nextVertex.getValue() == 0){
+					addNeighbor(V,nextVertex);
+					return true;
+				}
 			}
-			else{
-				return -2;
+			return false;
+		}
+		else if(V.getID() < list.size()-m){
+			nextVertex = list.get(V.getID()+1);
+			if(!nextVertex.visited){
+				if(nextVertex.getValue() == 0){
+					addNeighbor(V,nextVertex);
+					return true;
+				}
+				
 			}
+			nextVertex = list.get(V.getID()+m);
+			if(!nextVertex.visited){
+				if(nextVertex.getValue() == 0){
+					addNeighbor(V,nextVertex);
+					return true;
+				}
+			}
+			return false;
 		}
 		else{
-			if(list[index+1] == 0){
-				return index+1;
-			}
-			else if(list[index+m] == 0){
-				return index+m;
-			}
-			else{
-				return -2;
-			}
+			return false;
+		}
+	}
+	
+	public static void resetVisited(ArrayList<Vertex> adjList){
+		Vertex V;
+		for(int i = 0; i < adjList.size(); i++){
+			V = adjList.get(i);
+			V.visited = false;
 		}
 	}
 	
