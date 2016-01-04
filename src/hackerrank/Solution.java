@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class ArrayGame {
+public class Solution {
 
 	public static void main(String[] args) {
 		
@@ -60,7 +60,7 @@ public class ArrayGame {
 	}
 	
 	private static void findNeighbors(ArrayList<Vertex> adjLists, int m) {
-		// TODO Auto-generated method stub
+
 		for(int i = 0; i < adjLists.size()-m; i++){
 			Vertex V = adjLists.get(i);
 			while(addNextValidNeighbor(adjLists,V,m)){
@@ -86,6 +86,7 @@ public class ArrayGame {
 	}
 
 	public static boolean isPossibleToWin(ArrayList<Vertex> AdjList, int m){
+		
 		int index = AdjList.size()-m;
 		
 		for(int i = index; i < index+m;i++){
@@ -97,27 +98,17 @@ public class ArrayGame {
 	public static void explore(ArrayList<Vertex> G, Vertex V){
 		
 		V.visited = true;
-		//System.out.print("getNextNeighbor call on " + V.getID() + " returns: ");
-		//System.out.println(getNextNeighbor(G,V));
+		
 		Vertex W = new Vertex();
 		W = getNextNeighbor(G,V);
-		//System.out.println(W.getID());
+		
 		while(getNextNeighbor(G,V) != null){
 			Vertex U = getNextNeighbor(G,V);
-			//System.out.println("Inside explore");
+			
 			if(!U.visited){
 				explore(G,U);
 			}
 		}
-	}
-	
-	public static boolean hasUnvisitedNeighbors(Vertex V){
-		
-		for(Vertex U : V.neighbors){
-			if(!U.visited)
-				return true;
-		}
-		return false;
 	}
 	
 	public static Vertex getNextNeighbor(ArrayList<Vertex> G, Vertex V){
@@ -132,6 +123,7 @@ public class ArrayGame {
 		}
 		return null;
 	}
+	
 	public static void addNeighbor(Vertex V, Vertex U){
 		
 		V.neighbors.add(U);
@@ -142,6 +134,7 @@ public class ArrayGame {
 		
 		return V.neighbors;
 	}
+	
 	public static boolean addNextValidNeighbor(ArrayList<Vertex>list, Vertex V, int m){
 		Vertex nextVertex;
 		

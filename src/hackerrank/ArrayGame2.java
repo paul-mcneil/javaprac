@@ -7,7 +7,7 @@ public class ArrayGame2{
 
 	public static void main(String[] args){
 		
-		int m = 5;
+		int m = 3;
 		Vertex frontVertex;
 		int[] numArr = { 0, 1, 0, 0, 0, 1, 1};
 		//int[] numArr = { 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1};
