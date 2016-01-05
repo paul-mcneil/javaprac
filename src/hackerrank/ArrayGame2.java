@@ -1,3 +1,8 @@
+/*
+ * https://www.hackerrank.com/challenges/java-1d-array
+ * 
+ */
+
 package hackerrank;
 
 import java.util.ArrayList;
@@ -9,8 +14,8 @@ public class ArrayGame2{
 		
 		int m = 3;
 		Vertex frontVertex;
+		// test data
 		int[] numArr = { 0, 1, 0, 0, 0, 1, 1};
-		//int[] numArr = { 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1};
 		
 		// concatenates m zeros to the int array
 		int[] list = Arrays.copyOf(numArr, numArr.length+m);
@@ -44,7 +49,6 @@ public class ArrayGame2{
 	}
 	
 	private static void findNeighbors(ArrayList<Vertex> adjLists, int m) {
-		// TODO Auto-generated method stub
 		for(int i = 0; i < adjLists.size()-m; i++){
 			Vertex V = adjLists.get(i);
 			while(addNextValidNeighbor(adjLists,V,m)){
@@ -57,7 +61,6 @@ public class ArrayGame2{
 	}
 
 	private static ArrayList<Vertex> createAdjList(int[] list) {
-		// TODO Auto-generated method stub
 		ArrayList<Vertex> adjLists = new ArrayList<Vertex>();
 		for(int i = 0; i < list.length; i++){
 			Vertex V = new Vertex();
@@ -77,17 +80,14 @@ public class ArrayGame2{
 		}
 		return false;
 	}
+	// DFS subroutine 
 	public static void explore(ArrayList<Vertex> G, Vertex V){
 		
 		V.visited = true;
-		//System.out.print("getNextNeighbor call on " + V.getID() + " returns: ");
-		//System.out.println(getNextNeighbor(G,V));
 		Vertex W = new Vertex();
 		W = getNextNeighbor(G,V);
-		//System.out.println(W.getID());
 		while(getNextNeighbor(G,V) != null){
 			Vertex U = getNextNeighbor(G,V);
-			//System.out.println("Inside explore");
 			if(!U.visited){
 				explore(G,U);
 			}
@@ -104,17 +104,16 @@ public class ArrayGame2{
 	}
 	
 	public static Vertex getNextNeighbor(ArrayList<Vertex> G, Vertex V){
-		//System.out.println(V.getID());
+
 		for(int i = 0; i < V.neighbors.size(); i++){
-			//System.out.println(V.neighbors.get(i).visited);
 			if(!V.neighbors.get(i).visited){
-				//System.out.println("*** " + V.neighbors.get(i));
 				return V.neighbors.get(i);
 			}
 			
 		}
 		return null;
 	}
+	
 	public static void addNeighbor(Vertex V, Vertex U){
 		
 		V.neighbors.add(U);
@@ -125,6 +124,7 @@ public class ArrayGame2{
 		
 		return V.neighbors;
 	}
+	
 	public static boolean addNextValidNeighbor(ArrayList<Vertex>list, Vertex V, int m){
 		Vertex nextVertex;
 		
