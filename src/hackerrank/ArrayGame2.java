@@ -20,15 +20,6 @@ public class ArrayGame2{
 		// concatenates m zeros to the int array
 		int[] list = Arrays.copyOf(numArr, numArr.length+m);
 		
-		for(int i = 0; i < list.length; i++){
-			System.out.print(i + " ");
-		}
-		System.out.println("");
-		
-		for(int i = 0; i < list.length; i++){
-			System.out.print(list[i] + " ");
-		}
-		System.out.println("");
 		// create an adjacency list from an integer array
 		ArrayList<Vertex> adjLists = createAdjList(list);
 		
@@ -38,7 +29,7 @@ public class ArrayGame2{
 		// add neighbors to adjacency list
 		findNeighbors(adjLists,m);
 		
-		// find reachable vertexes from the starting vertex
+		// DFS subroutine find reachable vertices from the starting vertex
 		explore(adjLists, frontVertex);
 		
 		if(isPossibleToWin(adjLists, m))
@@ -92,15 +83,6 @@ public class ArrayGame2{
 				explore(G,U);
 			}
 		}
-	}
-	
-	public static boolean hasUnvisitedNeighbors(Vertex V){
-		
-		for(Vertex U : V.neighbors){
-			if(!U.visited)
-				return true;
-		}
-		return false;
 	}
 	
 	public static Vertex getNextNeighbor(ArrayList<Vertex> G, Vertex V){
