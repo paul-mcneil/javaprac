@@ -12,6 +12,7 @@ public class ArrayGame2{
 		int[] numArr = { 0, 1, 0, 0, 0, 1, 1};
 		//int[] numArr = { 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1};
 		
+		// concatenates m zeros to the int array
 		int[] list = Arrays.copyOf(numArr, numArr.length+m);
 		
 		for(int i = 0; i < list.length; i++){
@@ -23,12 +24,16 @@ public class ArrayGame2{
 			System.out.print(list[i] + " ");
 		}
 		System.out.println("");
-		
+		// create an adjacency list from an integer array
 		ArrayList<Vertex> adjLists = createAdjList(list);
 		
+		// set the starting vertex
 		frontVertex = adjLists.get(0);
+		
+		// add neighbors to adjacency list
 		findNeighbors(adjLists,m);
-	
+		
+		// find reachable vertexes from the starting vertex
 		explore(adjLists, frontVertex);
 		
 		if(isPossibleToWin(adjLists, m))
@@ -61,7 +66,6 @@ public class ArrayGame2{
 			adjLists.add(V);
 		}
 		return adjLists;
-		
 	}
 
 	public static boolean isPossibleToWin(ArrayList<Vertex> AdjList, int m){
