@@ -1,5 +1,12 @@
 /*
  * https://www.hackerrank.com/challenges/java-1d-array
+ * You are playing a game on your cellphone. You are given an array of length n, indexed from 0 to n−1. 
+ * Each element of the array is either 0 or 1. You can only move to an index which contains 0. 
+ * At first you are at the 0th position. In each move you can do one of the following things: 
+ * 		- Walk one step forward or backward.
+ * 		- Make a jump of exactly length m forward.
+ * You can't move backward from position 0. If you move to any position greater than n−1, you win the game.
+ * Given the array and the length of the jump, you need to determine if it's possible to win the game or not.
  * 
  */
 
