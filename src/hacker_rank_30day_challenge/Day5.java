@@ -2,17 +2,14 @@ package hacker_rank_30day_challenge;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.math.*;
 
 public class Day5 {
 
-	/* int[numCases][3]
-	 * A[0][0] A[0][1] A[0][2]
-	 * a		b		N
-	 * Case[0]
-	 * Case[1]
-	 * Case[2]
-	 */
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Scanner sc = new Scanner(System.in);
@@ -23,7 +20,7 @@ public class Day5 {
 		
 		for(int testCase = 0; testCase < numCases; testCase++){
 			
-			String input = IO.readString();
+			String input = readString();
 			String[] tokens = input.split(" ");
 			
 			inputCases[testCase][0] = Integer.parseInt(tokens[0]);
@@ -32,12 +29,8 @@ public class Day5 {
 		}
 		
 		for(int i = 0; i < numCases; i++){
-			for(int j = 0; j < 3; j++){
-				System.out.print(inputCases[i][j] + " ");
-			}
-			System.out.println("");
+			result.add(new ArrayList<Integer>());
 		}
-		
 		for(int i = 0; i < numCases; i++){
 			int a = inputCases[i][0];
 			int b = inputCases[i][1];
@@ -48,9 +41,14 @@ public class Day5 {
 				result.get(i).add(term);
 			}
 		}
+		
 		for(int i = 0; i < result.size(); i++){
-			System.out.println(result.get(i));
+			for(int j = 0; j < result.get(i).size(); j++){
+				System.out.print(result.get(i).get(j) + " ");
+			}
+			System.out.println("");
 		}
+		sc.close();
 		
 	}
 	
@@ -64,16 +62,17 @@ public class Day5 {
 		return result;		
 	}
 	
-	public static int findLargestN(int[][] A){
-		int largest = 0;
-		for(int i = 0; i < A.length; i++){
-			for(int j = 0; j < A[0].length; i++){
-				if(A[i][2] > largest){
-					largest = A[i][2];
-				}
+	public static String readString()
+	{
+		BufferedReader kb =
+				new BufferedReader(new InputStreamReader(System.in));
+		while (true) {
+			try {
+				return kb.readLine();
+			} catch (IOException e) {
+				// should never happen
 			}
 		}
-		return largest;
 	}
 
 }
